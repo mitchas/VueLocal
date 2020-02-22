@@ -1,5 +1,6 @@
 <template>
 	<div>
+
 		<transition name="lightbox">
 			<div class="lightbox" v-if="showModal"></div>
 		</transition>
@@ -45,12 +46,12 @@
 										<div class="field-body">
 											<button class="button red small" type="button" aria-label="Clear Local Storage" @click="clearLocalStorage()">
 												<span>Clear Local Storage</span>
-												<i class="far fa-trash"></i>
+												<i class="far fa-trash-alt"></i>
 											</button>
 											<!-- Local storage help toggle -->
 											<button id="localStorageHelpButton" @click="showLocalStorageHelp = !showLocalStorageHelp">
-												<span v-if="!showLocalStorageHelp">More Info about local storage</span>
-												<span v-else>Hide More Info</span>
+												<span v-if="!showLocalStorageHelp">What's this?</span>
+												<span v-else>Hide</span>
 												<i v-bind:class="{'far fa-chevron-down': !showLocalStorageHelp, 'far fa-chevron-up': showLocalStorageHelp}"></i>
 											</button>
 										</div>
@@ -59,22 +60,26 @@
 									<!-- Paragraph explaining local storage -->
 									<transition name="basic">
 										<div id="localStorageHelp" v-if="showLocalStorageHelp">
-											<p>
-												This site saves your preferences and data using your browser's local storage - which is basically just a file on <b>your</b> computer that this site can access every time you visit. None of the data ever leaves your computer.
-											</p>
-											<p>
-												However, this means that anyone who visits this site on this computer and browser will be using your preferences and data. If you're on a shared computer, or just want to clear the local storage, click the button above.
-											</p>
-											<p>
-												Note: user_preferences are set to their defaults in your local storage when the page loads again after clearing it.
-											</p>
-											<p v-if="localStorageString">
-												Your local storage currently looks like this:
-											</p>
+											Instead of accounts, this site uses your browser's local storage to remember your preferences and data. Here's what that means:
+											<ul>
+												<li>Local Storage is basically a file in your browser that this website can use to temporarily save things.</li>
+												<li>Because it's saved <b>only</b> in the browser, if you visit this site on another device or browser, you won't have your preferences or data.</li>
+												<li>Anyone who visits this site on this device/browser will have access to the data, but...</li>
+												<li>We don't save anything private or personal in there. It's mainly for settings you toggle (like remembering if you prefer dark or light mode).</li>
+											</ul>
+											If you'd like to clear the local storage and reset this site to the default settings, click the button above.
+											<br/>
+											<b>Your local storage currently looks like this:</b>
 											<!-- Code block to show existing local storage -->
 											<div class="local-storage-code-display" v-if="localStorageString">
 												<code>
-													{{localStorageString}}
+													<!-- If empty -->
+													<span v-if="localStorageString == '[]'">
+														[Your Local Storage is empty]
+													</span>
+													<span v-else>
+														{{localStorageString}}
+													</span>
 												</code>
 											</div>
 											
@@ -121,17 +126,19 @@ export default {
 	data() {
 		return {
 			// Show settings modal, set to true on mounted.
-			showModal: false,
+			showModal: true,
 			// Toggle help
 			showLocalStorageHelp: false,
 			// Variable to hold entire *string* of local storage for displaying to user
-			localStorageString: JSON.stringify(this.getAllLocalStorage()).split('\\').join(''),
+			localStorageString: null,
 		};
 	},
 	mounted() {
 		// Show modal, lock scroll
 		this.showModal = true;
 		this.scrollLock(true)
+		// Set localStorageString
+		this.getAllLocalStorage();
 	},
 	methods: {
 		// Close modal, emit close
@@ -177,7 +184,7 @@ export default {
 				values.push(item);
 			}
 
-			return values;
+			this.localStorageString = JSON.stringify(values).split('\\').join('');
 		}
 	}
 };
@@ -249,7 +256,9 @@ export default {
 			width: fit-content;
 			color: var(--text);
 			font-size: 13px;
-			padding: 10px 0 10px 15px;
+			font-weight: 500;
+			padding: 10px 0 10px 0;
+			margin-left: 15px;
 
 			i{
 				margin-left: 5px;
@@ -266,15 +275,20 @@ export default {
 		border: 1px solid var(--border);
 		margin: 10px 0 0 0;
 
-		p{
-			display: block;
-			padding: 0 0 10px 0;
-			font-size: 12px;
-			letter-spacing: 0.5px;
-			font-weight: 400;
-			line-height: 22px;
-			letter-spacing: 0.2px;
-			color: var(--textLightest);
+		font-size: 12px;
+		letter-spacing: 0.5px;
+		font-weight: 400;
+		line-height: 22px;
+		letter-spacing: 0.2px;
+		font-family: var(--systemFont);
+
+		b{
+			font-weight: bold;
+		}
+
+		// List of info
+		ul{
+			margin: 10px 0;
 		}
 	}
 
