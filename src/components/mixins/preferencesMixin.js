@@ -74,6 +74,12 @@ export default {
 		////////////////////
 		// Call this function to set preferences on UI based on value
 		setPrefs: function(){
+			// Start Page
+			if(this.$store.getters.userPreferences.startPage){
+				this.$router.push(this.$store.getters.userPreferences.startPage);
+				document.documentElement.scrollTop = 0;
+			}
+
 			// Dark mode
 			if(this.$store.getters.userPreferences.darkMode){
 				document.documentElement.setAttribute('data-theme', 'dark');

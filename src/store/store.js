@@ -18,6 +18,7 @@ export const store = new Vuex.Store({
 		userPreferences: {
 			darkMode: false,
 			animations: true,
+			startPage: '/'
 		}
 	},
 	mutations: {

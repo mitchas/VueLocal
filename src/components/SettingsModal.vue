@@ -20,73 +20,89 @@
 
 							<!-- General Preferences -->
 							<div class="settings-group">
-								<div class="settings-body">
-									<!-- UI Animations -->
-									<div class="setting-toggle">
-										<div class="setting-toggle-input">
-											<input id="animationToggle" type="checkbox" class="toggle" v-model="$store.getters.userPreferences.animations" @change="toggleAnimations()"/>
-										</div>
-										<label class="setting-toggle-label" for="animationToggle">
-											UI Animations
-											<small>You can turn off the UI animations like the ones that transition between pages.</small>
-										</label>
-									</div>
-									<!-- Email Address -->
-									<div class="setting-toggle">
-										<div class="setting-toggle-input">
-											<input id="darkmodeToggle" type="checkbox" class="toggle" v-model="$store.getters.userPreferences.darkMode" @change="toggleDarkMode()"/>
-										</div>
-										<label class="setting-toggle-label" for="darkmodeToggle">
-											Dark Mode
-										</label>
-									</div>
 
-									<!-- Clear local storage -->
-									<div class="field-row" id="clearLocalStorage">
-										<div class="field-body">
-											<button class="button red small" type="button" aria-label="Clear Local Storage" @click="clearLocalStorage()">
-												<span>Clear Local Storage</span>
-												<i class="far fa-trash-alt"></i>
-											</button>
-											<!-- Local storage help toggle -->
-											<button id="localStorageHelpButton" @click="showLocalStorageHelp = !showLocalStorageHelp">
-												<span v-if="!showLocalStorageHelp">What's this?</span>
-												<span v-else>Hide</span>
-												<i v-bind:class="{'far fa-chevron-down': !showLocalStorageHelp, 'far fa-chevron-up': showLocalStorageHelp}"></i>
-											</button>
-										</div>
+								<!-- Dark Mode -->
+								<div class="setting-toggle">
+									<div class="setting-toggle-input">
+										<input id="darkmodeToggle" type="checkbox" class="toggle" v-model="$store.getters.userPreferences.darkMode" @change="toggleDarkMode()"/>
 									</div>
-
-									<!-- Paragraph explaining local storage -->
-									<transition name="basic">
-										<div id="localStorageHelp" v-if="showLocalStorageHelp">
-											Instead of accounts, this site uses your browser's local storage to remember your preferences and data. Here's what that means:
-											<ul>
-												<li>Local Storage is basically a file in your browser that this website can use to temporarily save things.</li>
-												<li>Because it's saved <b>only</b> in the browser, if you visit this site on another device or browser, you won't have your preferences or data.</li>
-												<li>Anyone who visits this site on this device/browser will have access to the data, but...</li>
-												<li>We don't save anything private or personal in there. It's mainly for settings you toggle (like remembering if you prefer dark or light mode).</li>
-											</ul>
-											If you'd like to clear the local storage and reset this site to the default settings, click the button above.
-											<br/>
-											<b>Your local storage currently looks like this:</b>
-											<!-- Code block to show existing local storage -->
-											<div class="local-storage-code-display" v-if="localStorageString">
-												<code>
-													<!-- If empty -->
-													<span v-if="localStorageString == '[]'">
-														[Your Local Storage is empty]
-													</span>
-													<span v-else>
-														{{localStorageString}}
-													</span>
-												</code>
-											</div>
-											
-										</div>
-									</transition>
-
+									<label class="setting-label-large" for="darkmodeToggle">
+										Dark Mode
+									</label>
 								</div>
+
+								<!-- UI Animations -->
+								<div class="setting-toggle">
+									<div class="setting-toggle-input">
+										<input id="animationToggle" type="checkbox" class="toggle" v-model="$store.getters.userPreferences.animations" @change="toggleAnimations()"/>
+									</div>
+									<label class="setting-label-large" for="animationToggle">
+										UI Animations
+										<small>You can turn off the UI animations like the ones that transition between pages.</small>
+									</label>
+								</div>
+
+								<!-- Start Page Selector -->
+								<label class="setting-label-large mtop-xs">
+									Start Page {{test}}
+									<small>Select the page you'd like to load first when you visit this site.</small>
+								</label>
+								<div class="options-display">
+									<!-- v-for over all options defined in startPages -->
+									<div v-for="option in startPages" :key="option.label">
+										<input type="radio" name="startPage" v-bind:aria-label="option.label + ' Page'" v-bind:id="option.label+'StartPage'" v-model="$store.getters.userPreferences.startPage" v-bind:value="option.path" hidden/>
+										<label class="option" v-bind:for="option.label+'StartPage'">
+											<i v-bind:class="'fas ' + option.icon"></i>
+											<span>{{option.label}}</span>
+										</label>
+									</div>
+								</div>
+
+								<!-- Clear local storage -->
+								<div class="basic-field" id="clearLocalStorage">
+									<div class="field-body">
+										<button class="button red small" type="button" aria-label="Clear Local Storage" @click="clearLocalStorage()">
+											<span>Clear Local Storage</span>
+											<i class="far fa-trash-alt"></i>
+										</button>
+										<!-- Local storage help toggle -->
+										<button id="localStorageHelpButton" @click="showLocalStorageHelp = !showLocalStorageHelp">
+											<span v-if="!showLocalStorageHelp">What's this?</span>
+											<span v-else>Hide</span>
+											<i v-bind:class="{'far fa-chevron-down': !showLocalStorageHelp, 'far fa-chevron-up': showLocalStorageHelp}"></i>
+										</button>
+									</div>
+								</div>
+
+								<!-- Paragraph explaining local storage -->
+								<transition name="basic">
+									<div id="localStorageHelp" v-if="showLocalStorageHelp">
+										Instead of accounts, this site uses your browser's local storage to remember your preferences and data. Here's what that means:
+										<ul>
+											<li>Local Storage is basically a file in your browser that this website can use to temporarily save things.</li>
+											<li>Because it's saved <b>only</b> in the browser, if you visit this site on another device or browser, you won't have your preferences or data.</li>
+											<li>Anyone who visits this site on this device/browser will have access to the data, but...</li>
+											<li>We don't save anything private or personal in there. It's mainly for settings you toggle (like remembering if you prefer dark or light mode).</li>
+										</ul>
+										If you'd like to clear the local storage and reset this site to the default settings, click the button above.
+										<br/>
+										<b>Your local storage currently looks like this:</b>
+										<!-- Code block to show existing local storage -->
+										<div class="local-storage-code-display" v-if="localStorageString">
+											<code>
+												<!-- If empty -->
+												<span v-if="localStorageString == '[]'">
+													[Your Local Storage is empty]
+												</span>
+												<span v-else>
+													{{localStorageString}}
+												</span>
+											</code>
+										</div>
+										
+									</div>
+								</transition>
+
 							</div>
 
 						</div>
@@ -131,6 +147,23 @@ export default {
 			showLocalStorageHelp: false,
 			// Variable to hold entire *string* of local storage for displaying to user
 			localStorageString: null,
+			// Define potential start pages users can choose
+			test: null,
+			startPages: [
+				{
+					path: '/',
+					icon: 'far fa-home',
+					label: 'Home'
+				},{
+					path: '/privacy',
+					icon: 'far fa-shield-alt',
+					label: 'Privacy'
+				},{
+					path: '/terms',
+					icon: 'far fa-file-alt',
+					label: 'Terms'
+				}
+			]
 		};
 	},
 	mounted() {
@@ -194,12 +227,11 @@ export default {
 
 	@import '~@/styles/variables.less';
 
-
-	// Individual groups of settings
+	// Spacing for Individual groups of settings
 	.settings-group{
-		margin: 15px auto 15px auto;
+		margin: 0 auto 0 auto;
+		padding-bottom: 0;
 	}
-
 	
 	// Horizontal row layout for toggles
 	.setting-toggle{
@@ -213,37 +245,37 @@ export default {
 		.setting-toggle-input{
 			display: block;
 			padding-right: 15px;
-		}
-
-		.setting-toggle-label{
-			font-weight: 500;
-			font-size: 14px;
-			letter-spacing: 0.3px;
-			display: block;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			font-size: 16px;
-			letter-spacing: 0.4px;
-			font-weight: 600;
-
-			small{
-				font-size: 12px;
-				font-weight: 400;
-				line-height: 16px;
-				padding-top: 2px;
-				font-family: var(--systemFont);
-			}
-		}
-		
+		}		
 	}
 
+	// Large setting label with small text below
+	// Used for toggles on settings
+	.setting-label-large{
+		font-weight: 500;
+		font-size: 14px;
+		letter-spacing: 0.3px;
+		display: block;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-size: 16px;
+		letter-spacing: 0.4px;
+		font-weight: 600;
+
+		small{
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 16px;
+			padding-top: 2px;
+			font-family: var(--systemFont);
+		}
+	}
 
 	
 
 	// Field to clear local storage, everything inside
 	#clearLocalStorage{
-		margin-top: 20px;
+		margin-top: 10px;
 
 		// Center content inside
 		.field-body{
@@ -310,6 +342,61 @@ export default {
 
 		pre{
 			white-space: pre-wrap;
+		}
+	}
+
+	// Option select
+	// Basically just styled radios/checkboxes
+	.options-display{
+		display: flex;
+		flex-wrap: wrap;
+		box-sizing: border-box;
+		padding: 10px 0 0 0;
+
+		.option{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin: 0 15px 15px 0;
+			width: 76px;
+			height: 50px;
+			border-radius: var(--borderRadiusSmall);
+			border: 1px solid var(--border);
+			text-align: center;
+			transition: var(--transition);
+			color: var(--borderHover);
+
+			// Icon
+			i{
+				font-size: 17px;
+				padding-bottom: 6px;
+			}
+			// Label
+			span{
+				font-size: 14px;
+				font-weight: 600;
+				letter-spacing: 0.4px;
+			}
+
+			// Hover state
+			&:hover{
+				cursor: pointer;
+				border-color: var(--borderHover);
+				transition: var(--transition);
+				color: var(--textLighter);
+			}
+		}
+
+		// If checked 
+		input:checked + label{
+			border-color: var(--primaryHover);
+			color: var(--primary);
+			
+
+			&:hover{
+				border-color: var(--primaryHover);
+				color: var(--primary);
+			}
 		}
 	}
 

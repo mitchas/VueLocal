@@ -1,14 +1,16 @@
 <template>
 	<div class="page">
 
-		<h1 v-if="nameInStorage">Hello, {{user_name}}</h1>
-		<h1 v-else>Home</h1>
+		<!-- If name has been saved in local storage, greet them by name -->
+		<h1 v-if="nameInStorage">Welcome back, {{user_name}}</h1>
+		<!-- Otherwise general hello  -->
+		<h1 v-else>Hello</h1>
 
-		<!-- Form to enter your name -->
+		<!-- Form to enter name -->
 		<form @submit.prevent="saveName()" v-if="!nameSaved" class="mtop-md">
 
 			<!-- Name field -->
-			<div class="field-row mbottom-sm">
+			<div class="basic-field mbottom-sm">
 				<label for="name" v-if="!nameInStorage">
 					What's your name?
 				</label>
