@@ -335,12 +335,11 @@ export default {
 		code{
 			font-family: monospace;
 			display: block;
+			white-space: normal;
 			box-sizing: border-box;
 			padding: 5px 0;
 			line-height: 22px;
-		}
-
-		pre{
+			word-break:break-all;
 			white-space: pre-wrap;
 		}
 	}

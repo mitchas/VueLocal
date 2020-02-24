@@ -45,6 +45,9 @@ npm run lint
 
 # Other things to set up
 
+### Environment Variables
+Fill in your VUE_APP_BASE_URL and VUE_APP_BASE_PATH in `.env` and `.env.production`. The base URL should be the bare URL it'll be hosted at (ie https://example.com - no trailing slash) and the base path should be the path at the URL (ie /app if it'll be at example.com/app). For the root, leave it at /.
+
 ### Production Public Path
 If the app is going to be deployed in a sub directory (ie website.com/app/), edit the path in vue.config.js.
 
