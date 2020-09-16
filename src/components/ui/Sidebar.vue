@@ -5,23 +5,8 @@
 		<transition name="modal">
 			<div id="sidebarBody" class="visible-mobile" v-if="(isMobile && showMobileNav) || (!isMobile)">
 				<span @click="closeMobileNav()">
-					<!-- Home -->
-					<button class="icon-link" @click="navigate('/')" aria-label="Home" v-bind:class="{'is-active': $route.path == '/'}">
-						<i class="far fa-home"></i>
-						<span>Home</span>
-					</button>
-					<!-- Privacy Policy -->
-					<button class="icon-link" @click="navigate('/privacy')" aria-label="Privacy Policy" v-bind:class="{'is-active': $route.path == '/privacy'}">
-						<i class="far fa-shield-alt"></i>
-						<span>Privacy</span>
-					</button>
-					<!-- Terms of Service -->
-					<button class="icon-link" @click="navigate('/terms')"  aria-label="Terms of Service" v-bind:class="{'is-active': $route.path == '/terms'}">
-						<i class="far fa-file-alt"></i>
-						<span>Terms</span>
-					</button>
+					<!-- Links - click to close -->
 				</span>
-
 			</div> <!-- End Nav Links -->
 		</transition>
 
@@ -90,23 +75,24 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 
-	@import '~@/styles/variables.less';
+	@import '~@/styles/variables.scss';
 
 	nav#sidebar{
 		display: block;
 		height: auto;
 		overflow: visible;
 		z-index: 40;
-		width: 200px;
-		min-width: 200px;
-		max-width: 200px;
+		width: 275px;
+		min-width: 275px;
+		max-width: 250px;
 		box-sizing: border-box;
 		padding: 0 0 0 25px;
 		// margin-left: -200px;
+		background-color: var(--usgsBlue);
 
-		@media (max-width: @screenMD) {
+		@media (max-width: $screenMD) {
 			padding: 0;
 			width: 0px;
 			min-width: 0px;
@@ -125,8 +111,8 @@ export default {
 			top: 92px;
 
 			// Large mobile - float bottom right
-			@media (max-width: @screenMD) {
-				background-color: var(--backgroundLayer);
+			@media (max-width: $screenMD) {
+				background-color: var(--background);
 				position: fixed;
 				bottom: 100px;
 				right: 25px;
@@ -139,7 +125,7 @@ export default {
 			}
 
 			// Small mobile - Full width
-			@media (max-width: @screenSM) {
+			@media (max-width: $screenSM) {
 				bottom: 0px;
 				right: 0px;
 				width: 100%;
@@ -158,7 +144,7 @@ export default {
 				transform-origin: center bottom;
 			}
 			// XS - less side padding
-			@media (max-width: @screenXS) {
+			@media (max-width: $screenXS) {
 				padding: 20px 28px;
 			}
 
@@ -176,14 +162,14 @@ export default {
 				width: 100%;
 
 				// Large mobile, mostly similar
-				@media (max-width: @screenMD) {
+				@media (max-width: $screenMD) {
 					border: none;
 					margin: 0;
 					height: 44px;
 					padding: 0;
 				}
 				// Full mobile, no borders, larger text
-				@media (max-width: @screenSM) {
+				@media (max-width: $screenSM) {
 					border: none;
 					height: 48px;
 					margin: 0;
@@ -232,7 +218,7 @@ export default {
 					position: relative;
 
 					// Half mobile
-					@media (max-width: @screenMD) {
+					@media (max-width: $screenMD) {
 						font-size: 24px;
 						margin-right: 22px;
 						&.fa-planet-moon{
@@ -240,7 +226,7 @@ export default {
 						}
 					}
 					// Full mobile
-					@media (max-width: @screenSM) {
+					@media (max-width: $screenSM) {
 						font-size: 28px;
 						margin-right: 16px;
 						&.fa-planet-moon{
@@ -256,13 +242,13 @@ export default {
 					font-weight: 700;
 
 					// Large mobile, tweak icon
-					@media (max-width: @screenMD) {
+					@media (max-width: $screenMD) {
 						font-weight: 500;
 						font-size: 18px;
 					}
 
 					// Full mobile
-					@media (max-width: @screenSM) {
+					@media (max-width: $screenSM) {
 						font-size: 20px;
 						padding-top: 3px;
 					}
@@ -287,7 +273,7 @@ export default {
 					border: 1px solid var(--border);
 
 					// Large mobile, no border
-					@media (max-width: @screenMD) {
+					@media (max-width: $screenMD) {
 						border: none;
 					}
 
@@ -306,7 +292,7 @@ export default {
 
 				// Active click down
 				&:active{
-					@media (max-width: @screenSM) {
+					@media (max-width: $screenSM) {
 						// Chevron right
 						&:after{
 							opacity: 0.5;
@@ -322,7 +308,7 @@ export default {
 
 
 		// Mobile nav button
-		// Only shows at @screenSM
+		// Only shows at $screenSM
 		#mobileNav{
 			position: fixed;
 			bottom: 18px;
@@ -343,13 +329,13 @@ export default {
 				transition: 0.15s ease;
 			}
 
-			// Hide mobile button over @screenMD
-			@media (min-width: @screenMD) {
+			// Hide mobile button over $screenMD
+			@media (min-width: $screenMD) {
 				display: none;
 			}
 
 			// Small mobile - Hides behind menu
-			@media (max-width: @screenSM) {
+			@media (max-width: $screenSM) {
 				z-index: 50;
 				
 				&.open{
@@ -364,7 +350,7 @@ export default {
 			// Active/pressed state
 			&:focus,
 			&:active{
-				background-color: var(--primary);
+				background-color: var(--blue);
 				transform: scale(1.075);
 				transition: var(--transition);
 			}

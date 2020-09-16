@@ -1,0 +1,32 @@
+////////////////////
+//   Modifiers   //
+//////////////////
+
+.accent{
+}
+.text-bright{
+	color: var(--text);
+}
+.text-dim{
+	color: var(--textLight);
+}
+
+// Horizontal Rule
+hr{
+	border: none;
+	border-top: 1px solid;
+	border-color: var(--border);
+	height: 1px;
+	overflow: hidden;
+	margin: 8px auto
+}
+
+.confluence-body{
+	a{
+		color: var(--blue);
+	}
+
+	p{
+		margin: 6px 0;
+	}
+}

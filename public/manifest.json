@@ -1,6 +1,6 @@
 {
-  "name": "ABCDEFG",
-  "short_name": "ABCDEFG",
+  "name": "USGS Science Planning",
+  "short_name": "Science Planning",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#010708",
-  "theme_color": "#010708"
+  "background_color": "#01264C",
+  "theme_color": "#01264C"
 }

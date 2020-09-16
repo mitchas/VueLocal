@@ -35,8 +35,8 @@
 	}
 </script>
 
-<style lang="less">
-	@import '~@/styles/variables.less';
+<style lang="scss">
+	@import '~@/styles/variables.scss';
 
 	#notFound{
 		color: var(--text);
@@ -45,7 +45,7 @@
 			font-size: 120px;
 			margin-bottom: 55px;
 			// Center on mobile
-			@media (max-width: @screenMD) {
+			@media (max-width: $screenMD) {
 				margin: 35px auto;
 				text-align: center;
 				width: 100%;
@@ -62,7 +62,7 @@
 			display: block;
 			width: fit-content;
 
-			@media (max-width: @screenMD) {
+			@media (max-width: $screenMD) {
 				margin: 0 auto;
 				padding: 35px 0;
 			}
@@ -78,7 +78,7 @@
 			max-width: 450px;
 
 			// Center, full width on mobile
-			@media (max-width: @screenMD) {
+			@media (max-width: $screenMD) {
 				max-width: none;
 				text-align: center;
 				width: 100%;
@@ -90,7 +90,7 @@
 			padding: 15px 0 35px 0;
 
 			// Center, full width on mobile
-			@media (max-width: @screenMD) {
+			@media (max-width: $screenMD) {
 				max-width: none;
 				text-align: center;
 				width: 100%;

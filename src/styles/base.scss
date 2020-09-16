@@ -1,0 +1,92 @@
+
+// Project stylesheets
+@import 'variables';
+@import 'helpers';
+@import 'forms'; 
+@import 'modals';
+@import 'typography';
+@import 'animations';
+@import 'activities';
+
+body, html{
+	margin: 0 auto;
+	font-family: var(--sans);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	min-height: 100%;
+	width: 100%;
+	color: var(--text);
+	background-color: var(--background);
+}
+html{
+	display: flex;
+}
+body{
+	max-height: none;
+	box-sizing: border-box;
+	min-height: 100%;
+	flex-grow: 3;
+
+	&.scroll-lock{
+		overflow: hidden;
+		max-height:100%;
+	}
+}
+
+::-webkit-scrollbar{
+	width: 8px;
+	height: 8px;
+	// width: 0px;
+	// display: none;
+	width: 0px;
+}
+
+::-webkit-scrollbar-track{
+	display: none;
+	width: 0px;
+
+}
+
+::-webkit-scrollbar-thumb{
+	background: rgba(0,0,0,0.15);
+	box-sizing: border-box;
+	border-radius: 3px;
+	display: none;
+	width: 0px;
+
+}
+
+::selection {
+	background: #1857EF; /* Gecko Browsers */
+	color: #E0EAF9;
+}
+::-moz-selection {
+	background: rgb(187, 189, 194); /* Gecko Browsers */
+	color: #E0EAF9;
+}
+
+// Default page styles
+// Don't use class .page for pages that need custom headers, etc
+.page{
+	box-sizing: border-box;
+	padding: 10px 20px 50px 20px;
+	min-height: 70vh;
+	max-width: 1080px;
+	margin: 0 auto;
+
+	@media (min-width: $screenMD) {
+		padding: 0 35px 70px 35px;
+	}
+	@media (min-width: $screenXL) {
+		padding: 0 45px;
+	}
+
+
+
+	&.full{
+		padding: 0;
+		max-width: 100%;
+	}
+}
+
+

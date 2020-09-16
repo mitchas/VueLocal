@@ -1,0 +1,421 @@
+////////////////////////
+//   Activity List    //
+//////////////////////
+.activities-list{
+	display: block;
+	padding-top: 15px;
+
+	.activities-list-header,
+	.activity{
+		display: flex;
+		width: 100%;
+		background-color: transparent;
+		border: none;
+		text-align: left;
+		justify-content: space-between;
+		// margin: 0 0 10px 0;
+		box-sizing: border-box;
+		height: auto;
+		transition: var(--transition);
+		padding: 15px 30px;
+		border-bottom: 1px solid var(--border);
+		border-radius: 0;
+		position: relative;
+
+		// Reduce padding
+		@media (max-width: $screenMD) {
+			padding: 6px 10px;
+			font-size: 14px;
+		}
+
+
+		// Flag icon
+		.activity-flag{
+			position: absolute;
+			left: 0;
+			width: 20px;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			height: 100%;
+			top: 0;
+
+			// Float left in margins
+			@media (max-width: $screenMD) {
+				// position: relative;
+				left: -12px;
+				width:14px;
+			}
+
+			div{
+			}
+
+			img{
+				height: 20px;
+				width: auto;
+				margin: 0 auto;
+
+				// Shrink
+				@media (max-width: $screenMD) {
+					height:14px;
+				}
+			}
+		}
+
+		.title,
+		.role,
+		.fy,
+		.month{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			&.fy{
+				width: 10%;
+				min-width: 10%;
+				max-width: 10%;
+			}
+			&.title{
+				flex-grow: 3;
+				box-sizing: border-box;
+				padding-right: 15px;
+			}
+			&.role{
+				width: 25%;
+				min-width: 25%;
+				max-width: 25%;
+			}
+			&.month{
+				width: 20%;
+				min-width: 20%;
+				max-width: 20%;
+				text-align: right;
+			}
+
+		}
+
+		&:last-child{
+			border-bottom: none;
+			margin-bottom: none;
+		}
+
+		&:hover{
+			cursor: pointer;
+			text-decoration: underline;
+			color: var(--blue);
+		}
+	}
+
+	// List Header changes
+	.activities-list-header{
+		background-color: var(--usgsBlue);
+		color: var(--white);
+		height: 50px;
+		font-weight: 600;
+		border-radius: var(--borderRadiusSmall);
+
+		&:hover{
+			cursor: default;
+			color: var(--white);
+			text-decoration: none;
+		}
+	}
+}
+
+
+
+
+////////////////////////
+//      Fields       //
+//////////////////////
+// These are wrappers for input/label combos. 
+
+
+// Vertical fields
+.basic-field{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	max-width: 320px;
+	padding: 0 0 0 0;
+	position: relative;
+
+	@media (max-width: $screenMD) {
+		width: 100%;
+		max-width: none;
+	}
+
+	// Labels inside basic fields use default styling
+
+	// Field body
+	// Set standard text size, small text
+	.field-body{
+		font-weight: 600;
+		font-size: 18px;
+		letter-spacing: 0.4px;
+		padding: 2px 0;
+		line-height: 22px;
+
+		small{
+			display: block;
+			font-size: 12px;
+			font-weight: 600;
+			padding-top: 2px;
+			line-height: 14px;
+			letter-spacing: 0.5px;
+			color: var(--textLightest);
+			// opacity: 0.5;
+			text-transform: capitalize;
+		}
+
+		// Inputs full width of field
+		input{
+			width: 100%;
+		}
+	}
+}
+
+
+////////////////////////
+//      Text        //
+//////////////////////
+
+
+
+
+/////////////////////////
+//     Checkboxes     //
+///////////////////////
+// input[type="checkbox"] {
+// 	-webkit-appearance: none;
+// 	-moz-appearance: none;
+// 	appearance: none;
+// 	-webkit-tap-highlight-color: transparent;
+// 	cursor: pointer;
+// }
+// input[type="checkbox"]:focus {
+// 	outline: 0;
+// }
+
+// Turn into checks
+.check {
+	height: 28px;
+	min-height: 28px;
+	max-height: 28px;
+	width: 28px;
+	min-width: 28px;
+	max-width: 28px;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	border-radius: var(--borderRadiusSmall);
+	box-sizing: border-box;
+	border: 1px solid var(--border);
+	transition: all 0.2s ease;
+	background: rgb(245, 248, 250);
+	font-size: 16px;
+	font-weight: 800;
+
+	// Increase size on mobile
+	@media (max-width: $screenMD) {
+		height: 34px;
+		min-height: 34px;
+		max-height: 34px;
+		width: 34px;
+		min-width: 34px;
+		max-width: 34px;
+	}
+
+	&:hover{
+		transition: all 0.2s ease;
+		border-color: var(--borderHover);
+	}
+
+	&:focus{
+		transition: all 0.2s ease;
+	}
+
+	&:after {
+		//28x28 dimensions
+		content: "\f00c";
+		position: relative;
+		font-family: var(--fontAwesome);
+		font-weight: 900;
+		transition: var(--bezierTransition);
+		transform: scale(0.75);
+		color: var(--text);
+		opacity: 0.3;
+		font-size: 16px;
+		left: 5px;
+		top: 4px;
+
+		// Increase size on mobile
+		@media (max-width: $screenMD) {
+			// 34x34 dimensions
+			font-size: 20px;
+			left: 6px;
+			top: 5.5px;
+		}
+	}
+
+	&:checked {
+		border-color: var(--borderHover);
+		&:hover{
+			&:after{
+				opacity: 1;
+			}
+		}
+	}
+
+	&:checked:after {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+// Toggle 
+.toggle{
+	height: 33px;
+	width: 52px;
+	border-radius: 16px;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+	border: 1px solid var(--border);
+	transition: all .2s ease;
+	background-color: rgb(245, 248, 250);
+	&:after{
+		content: '';
+		position: absolute;
+		top: 3px;
+		left: 4px;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: var(--border);
+		box-shadow: 0 1px 2px rgba(34,44,64,.13);
+		transition: all .2s cubic-bezier(.5,.1,.75,1.35);
+	}
+	&:checked{
+		border: 2px solid var(--blueHover);
+		background: var(--blue);
+		&:after{
+			background: var(--textInvert);
+			transform: translatex(17px);
+		}
+	}
+}
+// Agreement div 
+// Checkbox with longer label on side
+.agreement{
+	display: flex;
+	box-sizing: border-box;
+	// padding: 10px 0 10px 0;
+	margin: 8px 0;
+	height: 28px;
+
+	// Increase size on small screens
+	@media (max-width: $screenMD) {
+		height: 34px;
+	}
+
+	.check{
+	}
+
+	label{
+		flex-grow: 3;
+		box-sizing: border-box;
+		line-height: 14px;
+		font-size: 12px;
+		padding-left: 10px;
+		vertical-align: middle;
+		letter-spacing: 0.3px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding-top: 7px;
+
+		// Fix padding on mobile
+		@media (max-width: $screenMD) {
+			font-size: 14px;
+		}
+
+		a{
+			font-weight: 600;
+			&:focus{
+				text-decoration-style: dashed;
+			}
+		}
+	}
+}
+
+
+
+/////////////////////////
+//    VALIDATION      //
+///////////////////////
+.form-message{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px 10px;
+	border-radius: var(--borderRadiusSmall);
+	margin: 5px auto 5px auto;
+	border: 1px solid var(--red);
+	background-color: var(--redTransparent);
+	color: var(--red);
+
+	span{
+		font-size: 13px;
+		display: block;
+		padding-top: 2px;
+		line-height: 15px;
+		font-weight: 500;
+		letter-spacing: 0.3px;
+
+		// Increase size on mobile
+		@media (max-width: $screenMD) {
+			font-size: 14px;
+			line-height: 16px;
+		}
+	}
+}
+
+
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+// Cool unused code 
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+
+// Invalid input
+input.xinvalid:invalid{
+	box-shadow: none;
+
+	~ label{
+		pointer-events: none;
+
+		&:after{
+			content: '\f12a';
+			font-family: var(--fontAwesome);
+			display: block;
+			font-weight: 600;
+			font-size: 15px;
+			height: 0px;
+			overflow: visible;
+			color: var(--red);
+			float: right;
+			position: relative;
+			top: 26px;
+			left: -10px;
+		}
+	}
+
+	
+}
+input.xinvalid:placeholder-shown{
+}

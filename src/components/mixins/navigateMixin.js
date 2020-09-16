@@ -16,6 +16,11 @@ export default {
 				this.$router.push(route);
 				document.documentElement.scrollTop = 0;
 			}
-		}
+		},
+		// Function to navigate to a new tab with -> tab("link")
+		// then use @click to tab()
+		tab: function(url) {
+			window.open(url, '_blank');
+		},
 	}
 };

@@ -1,16 +1,26 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import './registerServiceWorker'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+// import "./registerServiceWorker";
 
-import './styles/base.less'
+// Import USWDS
+Vue.use(require("uswds"));
+// USWDS Styles
+import "../node_modules/uswds/dist/scss/uswds.scss";
 
-Vue.config.productionTip = false
-Vue.use(require('vue-moment'));
+// Import Project independent styles
+import "./styles/base.scss";
 
-let app = '';
+Vue.config.productionTip = false;
+Vue.use(require("vue-moment"));
 
-import { store } from '@/store/store'
+let app = "";
+
+import { store } from "@/store/store";
+
+// Lodash
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
 
 
 // Create vue app
@@ -21,5 +31,5 @@ if (!app) {
 		data: {
 		},
 		render: h => h(App)
-	}).$mount('#app');
+	}).$mount("#app");
 }

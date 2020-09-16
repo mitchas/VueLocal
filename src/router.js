@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+
+// Pages
+import Overview from './views/Overview.vue';
+import Activities from './views/Activities.vue';
+// Roles
+import Role from './views/Role.vue';
+
 // Authentication
 import Error404 from './views/other/error404.vue';
-
-// Docs
-import TermsOfService from './views/other/docs/TermsOfService.vue';
-import PrivacyPolicy from './views/other/docs/PrivacyPolicy.vue';
 
 import { store } from '@/store/store'
 
@@ -20,26 +22,44 @@ const router = new Router({
 	scrollBehavior() {
 		return { x: 0, y: 0 };
 	},
-	routes: [{
+	routes: [
+		{
 			path: '/',
-			name: 'home',
-			component: Home,
+			name: 'overview',
+			component: Overview,
 		},
-
-		//////////////////////////////
-		// Help & Docs
-		//////////////////////////////
-		// TOS
+		// Activities
 		{
-			path: '/terms',
-			name: 'TermsOfService',
-			component: TermsOfService
+			path: '/activities/',
+			name: 'activities',
+			component: Activities,
 		},
-		// Privacy Policy
+		// Roles
 		{
-			path: '/privacy',
-			name: 'PrivacyPolicy',
-			component: PrivacyPolicy
+			path: '/role/employees',
+			name: 'employees',
+			component: Role,
+		},
+		{
+			path: '/role/centerdirectors',
+			alias: '/role/#centerdirectors',
+			name: 'centerdirectors',
+			component: Role,
+		},
+		{
+			path: '/role/coordinators',
+			name: 'coordinators',
+			component: Role,
+		},
+		{
+			path: '/role/budget',
+			name: 'budget',
+			component: Role,
+		},
+		{
+			path: '/role/executives',
+			name: 'executives',
+			component: Role,
 		},
 
 		// 404

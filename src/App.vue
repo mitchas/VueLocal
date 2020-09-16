@@ -10,21 +10,24 @@
 				<!-- Logo, account dropdown, etc -->
 				<TopBar></TopBar>
 
-				<!-- All page contetnt contained within main -->
+				<!-- All page content contained within main -->
 				<main id="content">
 
 					<!-- Sidebar Component -->
-					<Sidebar></Sidebar>
+					<!-- <Sidebar></Sidebar> -->
 				
 					<!-- Center/Main Content -->
-					<div class="body-content">
-						<!-- page transition defined in base.less -->
+					<div class="body-content no-sidebar">
+						<!-- page transition defined in base.scss -->
 						<transition name="page" mode="out-in">
-							<router-view/>
+							<router-view :key="$route.fullPath" />
 						</transition>
 					</div>
 					
 				</main>
+
+				<!-- Footer -->
+				<Footer></Footer>
 
 				<!-- Toast Component -->
 				<Toast ref="toastComponent"></Toast>
@@ -39,10 +42,10 @@
 // Components
 import Toast from "@/components/ui/Toast";
 import TopBar from "@/components/ui/TopBar";
-import Sidebar from "@/components/ui/Sidebar";
+import Footer from "@/components/ui/Footer";
+// import Sidebar from "@/components/ui/Sidebar";
 // Mixins
 import navigateMixin from "@/components/mixins/navigateMixin.js";
-import preferencesMixin from "@/components/mixins/preferencesMixin.js";
 
 
 
@@ -50,41 +53,39 @@ export default {
 	name: "app",
 	mixins: [
 		navigateMixin,
-		preferencesMixin,
 	],
 	components: {
 		Toast,
 		TopBar,
-		Sidebar
+		Footer,
+		// Sidebar
 	},
 	data() {
 		return {
 			scrollLockPos: 0,
 			pageMounted: false,
+			thisYear: '2012',
+			
 		};
 	},
 	created: function () {
+
+		// Get current month in FY
+    	var d = new Date();
+		var regularMonth = d.getMonth() + 3;
+		if(regularMonth > 11){regularMonth = regularMonth - 12}
+    	this.$store.getters.dates.FYMonth = regularMonth;
+    	// $scope.currentTextMonthInFiscalYear = $scope.months[$scope.currentMonthInFiscalYear];
+
+
+		
 	},
 	computed: {
-		// Computed prefs to watch
-		prefs () {
-			return this.$store.getters.userPreferences
-		}
   	},
 	watch: {
-		// Watch prefs, save to localstorage
-		prefs: {
-			handler() {
-				localStorage.setItem('user_preferences', JSON.stringify(this.$store.getters.userPreferences));
-			},
-			deep: true,
-		},
 	},
 	mounted() {
 		this.pageMounted = true;
-
-		// Get and set prefs from local storage
-		this.getPrefs();
 	},
 	beforeDestroy() { 
 	},
@@ -102,9 +103,8 @@ export default {
 };
 </script>
 
-<style lang="less">
-
-	@import '~@/styles/variables.less';
+<style lang="scss">
+	@import '~@/styles/variables.scss';
 
 	#app {
 		display: block;
@@ -133,7 +133,7 @@ export default {
 		z-index: 60;
 		display: flex;
 		min-height: 85vh;
-		min-height: calc(~'100% - 70px');
+		min-height: calc(100% - 92px);
 
 
 		// Main body content
@@ -145,19 +145,31 @@ export default {
 			flex-grow: 3;
 			min-height: 90vh;
 			// to account for header
-			min-height: calc(~'100% - 100px');
-			
+			min-height: calc(100% - 100px);
 
-			@media (min-width: @screenMD) {
-				padding-left: 50px;
-				padding-right: 25px;
+			@media (min-width: $screenMD) {
+				padding-left: 45px;
+				padding-right: 35px;
 			}
-			@media (min-width: @screenLG) {
+			@media (min-width: $screenLG) {
 				padding-left: 60px;
 			}
-			@media (min-width: @screenXL) {
+			@media (min-width: $screenXL) {
 				padding-left: 70px;
 				padding-right: 45px;
+			}
+
+			// No sidebar
+			&.no-sidebar{
+				@media (min-width: $screenMD) {
+					padding: 0 0;
+				}
+				@media (min-width: $screenLG) {
+					padding-left: 0px;
+				}
+				@media (min-width: $screenXL) {
+					padding: 0 0;
+				}
 			}
 		}
 	}

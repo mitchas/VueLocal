@@ -90,9 +90,9 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 
-	@import '~@/styles/variables.less';
+	@import '~@/styles/variables.scss';
 
 	///////////////////
 	//    Toast     //
@@ -107,7 +107,7 @@ export default {
 		right: 25px;
 		display: flex;
 		flex-direction: column;
-		background-color: var(--backgroundLayer);
+		background-color: var(--background);
 		border-radius: 6px;
 		transition: var(--transition);
 		box-shadow: var(--shadow);
@@ -115,7 +115,7 @@ export default {
 		transform: translateY(0px);
 		transform-origin: center right;
 
-		@media (max-width: @screenSM) {
+		@media (max-width: $screenSM) {
 			right: unset;
 			width: 100%;
 			border-radius: 0;
@@ -150,7 +150,7 @@ export default {
 			transition: var(--transition);
 			opacity: 0.3;
 
-			@media (max-width: @screenSM) {
+			@media (max-width: $screenSM) {
 				font-size: 18px;
 				width: 30px;
 				height: 30px;
@@ -169,7 +169,7 @@ export default {
 			.toast-close{
 				transition: var(--transition);
 				opacity: 0.8;
-				background-color: var(--backgroundLayer);
+				background-color: var(--background);
 			}
 
 		}
@@ -182,7 +182,7 @@ export default {
 			color: var(--text);
 
 			// Increase padding on smaller screens
-			@media (max-width: @screenSM) {
+			@media (max-width: $screenSM) {
 				padding: 18px 28px 23px 18px;
 			}
 
@@ -201,7 +201,7 @@ export default {
 				height: auto;
 				padding-bottom: 2px;
 				border-right: 1px solid var(--textLight);
-				color: var(--primary);
+				color: var(--blue);
 			}
 
 			// Body of the toastt
@@ -217,7 +217,7 @@ export default {
 				color: var(--text);
 
 				// Adjust spacing on small screens
-				@media (max-width: @screenSM) {
+				@media (max-width: $screenSM) {
 					max-width: none;
 					min-width: 0px;
 					padding-left: 25px;
@@ -250,7 +250,7 @@ export default {
 			max-height: 4px;
 
 			// Make a bit bigger on mobile
-			@media (max-width: @screenSM) {
+			@media (max-width: $screenSM) {
 				height: 6px;
 				min-height: 6px;
 				max-height: 6px;
@@ -262,7 +262,7 @@ export default {
 				display:flex;
 				width: 0%;
 				height: 100%;
-				background-color: var(--primary);
+				background-color: var(--blue);
 				border-bottom-left-radius: 4px;
 			}
 

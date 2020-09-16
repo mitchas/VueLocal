@@ -1,0 +1,30 @@
+/////////////////////////////
+////    Misc Helpers    ////
+///////////////////////////
+// Ignore class makes invisible while keeping bounds - ignores click
+.ignore{
+	opacity: 0;
+	pointer-events: none;
+	transition: var(--transition);
+}
+
+// Display block
+.block{
+	display: block;
+}
+
+// Hide scrollbars
+.no-scrollbars,
+.no-scrollbars *{
+	scrollbar-width: none;
+	// Hidden
+	&::-webkit-scrollbar{
+		width: 0px;
+		display: none;
+	}
+	// Scrollbar handle/thumb
+	&::-webkit-scrollbar-thumb{
+		display: none;
+		width: 0px;
+	}
+}
